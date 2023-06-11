@@ -1,17 +1,40 @@
+import PropTypes from 'prop-types';
+
 export default function Card(props) {
+  let badgeText;
+  if (props.openSpots === 0) {
+    badgeText = 'SOLD OUT';
+  } else if (props.location === 'Online') {
+    badgeText = 'ONLINE';
+  }
+
   return (
     <div className="card">
-      <img src="./src/images/katie-zaferes.png" className="card--image" />
+      {badgeText && <div className="card--badge">{badgeText}</div>}
+      {badgeText && <div className="card--badge">{badgeText}</div>}
+      <img src={`./src/images/${props.coverImg}`} className="card--image" />
       <div className="card--stats">
         <img src="./src/images/star.png" className="card--star" />
-        <span>5.0</span>
-        <span className="gray">(6) • </span>
-        <span className="gray">USA</span>
+        <span>{props.stats.rating}</span>
+        <span className="gray">({props.stats.reviewCount}) • </span>
+        <span className="gray">{props.location}</span>
       </div>
-      <p>Life Lessons with Katie Zaferes</p>
+      <p>{props.title}</p>
       <p>
-        <span className="bold">From $136</span> / person
+        <span className="bold">From ${props.price}</span> / person
       </p>
     </div>
   );
 }
+
+Card.propTypes = {
+  openSpots: PropTypes.number.isRequired,
+  location: PropTypes.string.isRequired,
+  coverImg: PropTypes.string.isRequired,
+  stats: PropTypes.shape({
+    rating: PropTypes.number.isRequired,
+    reviewCount: PropTypes.number.isRequired,
+  }).isRequired,
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+};
