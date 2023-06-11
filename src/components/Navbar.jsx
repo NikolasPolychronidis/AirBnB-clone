@@ -3,7 +3,7 @@ export default function Navbar() {
     <nav>
       <img
         className="nav--logo"
-        src="./src/images/airbnb-logo.png"
+        src="/images/airbnb-logo.png"
         alt="Airbnb Logo"
       />
     </nav>
